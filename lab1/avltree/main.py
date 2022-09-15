@@ -5,12 +5,12 @@ from lab1.printer import printer
 def main():
     avl_tree = AVLTree()
     root = None
-    insert_nums = [33, 13, 52, 9, 21, 61, 8, 11]
+    insert_nums = [14, 17, 11, 7, 53, 4, 13, 12, 8, 60, 19, 16, 20]
     for num in insert_nums:
         root = avl_tree.insert_node(root, num)
     printer(root, None, False, False)
     print()
-    avl_tree.delete_node(root, 13)
+    avl_tree.delete_node(root, 60)
     printer(root, None, False, False)
 
 
