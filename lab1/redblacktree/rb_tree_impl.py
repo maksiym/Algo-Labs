@@ -36,84 +36,84 @@ class RedBlackTree:
             y.parent = curr_elem
         return x
 
-    def insert_balance(self, root, item):
+    def insert_balance(self, node, item):
 
         # Inserting as in BST
         rr_conflict: bool = False
-        if root is None:
+        if node is None:
             return RBNode(item)
-        elif item < root.item:
-            root.left = self.insert_balance(root.left, item)
-            root.left.parent = root
-            if root is not self.root:
-                if root.color == 1 and root.left.color == 1:
+        elif item < node.item:
+            node.left = self.insert_balance(node.left, item)
+            node.left.parent = node
+            if node is not self.root:
+                if node.color == 1 and node.left.color == 1:
                     rr_conflict = True
         else:
-            root.right = self.insert_balance(root.right, item)
-            root.right.parent = root
-            if root is not self.root:
-                if root.color == 1 and root.right.color == 1:
+            node.right = self.insert_balance(node.right, item)
+            node.right.parent = node
+            if node is not self.root:
+                if node.color == 1 and node.right.color == 1:
                     rr_conflict = True
 
         # Rotating cases
         if self.ll:
-            root = self.l_rotate(root)
-            root.color = 0
-            root.left.color = 1
+            node = self.l_rotate(node)
+            node.color = 0
+            node.left.color = 1
             self.ll = False
 
         elif self.rr:
 
-            root = self.r_rotate(root)
-            root.color = 0
-            root.right.color = 1
+            node = self.r_rotate(node)
+            node.color = 0
+            node.right.color = 1
             self.rr = False
 
         elif self.rl:
 
-            root.right = self.r_rotate(root.right)
-            root.right.parent = root
-            root = self.l_rotate(root)
-            root.color = 0
-            root.left.color = 1
+            node.right = self.r_rotate(node.right)
+            node.right.parent = node
+            node = self.l_rotate(node)
+            node.color = 0
+            node.left.color = 1
             self.rl = False
 
         elif self.lr:
 
-            root.left = self.l_rotate(root.left)
-            root.left.parent = root
-            root = self.r_rotate(root)
-            root.color = 0
-            root.right.color = 1
+            node.left = self.l_rotate(node.left)
+            node.left.parent = node
+            node = self.r_rotate(node)
+            node.color = 0
+            node.right.color = 1
             self.lr = False
 
         # Recoloring cases
         if rr_conflict:
-            if root.parent.right == root:
+            if node.parent.right == node:
 
-                if root.parent.left is None or root.parent.left.color == 0:
-                    if root.left is not None and root.left.color == 1:
+                if node.parent.left is None or node.parent.left.color == 0:
+                    if node.left is not None and node.left.color == 1:
                         self.rl = True
-                    elif root.right is not None and root.right.color == 1:
+                    elif node.right is not None and node.right.color == 1:
                         self.ll = True
                 else:
-                    root.parent.left.color = 0
-                    root.color = 0
-                    if root.parent is not self.root:
-                        root.parent.color = 1
+                    node.parent.left.color = 0
+                    node.color = 0
+                    if node.parent is not self.root:
+                        node.parent.color = 1
             else:
-                if root.parent.right is None or root.parent.right.color == 0:
-                    if root.left is not None and root.left.color == 1:
+                if node.parent.right is None or node.parent.right.color == 0:
+                    if node.left is not None and node.left.color == 1:
                         self.rr = True
-                    elif root.right is not None and root.right.color == 1:
+                    elif node.right is not None and node.right.color == 1:
                         self.lr = True
                 else:
-                    root.parent.right.color = 0
-                    root.color = 0
-                    if root.parent is not self.root:
-                        root.parent.color = 1
+                    node.parent.right.color = 0
+                    node.color = 0
+                    if node.parent is not self.root:
+                        node.parent.color = 1
 
-        return root
+        return node
 
     def insert(self, item):
         if self.root is None:
