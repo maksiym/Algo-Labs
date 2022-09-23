@@ -22,7 +22,6 @@ def create_from_input_file(input_file_name: str):
         for j in range(0, parameters[5]):
             i.append(random.randint(0, 1))
         maze.append(i)
-        print(i)
 
     graph_maze = {}
     for i in range(0, len(maze)):
@@ -73,7 +72,9 @@ def main():
             maze[result_path[i][0]][result_path[i][1]] = '*'
 
     for i in range(len(maze)):
-        print(maze[i])
+        for j in maze[i]:
+            print(j, '', end='')
+        print()
 
 
 if __name__ == '__main__':
