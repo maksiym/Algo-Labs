@@ -3,10 +3,9 @@ from collections import deque
 
 def find_path_by_bfs(maze: list, graph: dict, start_point: tuple, destination_point: tuple) -> list:
     search_queue = deque()
-    n_checked = [start_point]
-    path_bool = False
+    is_path = False
     search_queue.append(start_point)
-
+    n_checked = [start_point]
     checked = []
     prev_neighbour = {start_point: None}
 
@@ -19,7 +18,7 @@ def find_path_by_bfs(maze: list, graph: dict, start_point: tuple, destination_po
 
             if destination_point in neighbours:
                 prev_neighbour[destination_point] = curr_point
-                path_bool = True
+                is_path = True
                 break
 
             else:
@@ -33,10 +32,10 @@ def find_path_by_bfs(maze: list, graph: dict, start_point: tuple, destination_po
                 checked.append(curr_point)
 
     shortest_path = [destination_point]
-    if path_bool:
+    if is_path:
         while prev_neighbour[destination_point] is not None:
             shortest_path.append(prev_neighbour[destination_point])
             destination_point = prev_neighbour[destination_point]
-        shortest_path.reverse()
+        # shortest_path.reverse()
 
     return shortest_path
