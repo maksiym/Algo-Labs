@@ -22,6 +22,9 @@ class DFS:
             if root.r_root is not None:
                 right_max = dfs(root.r_root)
 
+            left_max = max(left_max, 0)
+            right_max = max(right_max, 0)
+
             res[0] = max(res[0], root.xp + left_max, root.xp + right_max)
 
             return root.xp + max(left_max, right_max)
