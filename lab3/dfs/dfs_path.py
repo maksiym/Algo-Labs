@@ -22,9 +22,6 @@ class DFS:
             if root.r_root is not None:
                 right_max = dfs(root.r_root)
 
-            left_max = max(left_max, 0)
-            right_max = max(right_max, 0)
-
             res[0] = max(res[0], root.xp + left_max, root.xp + right_max)
 
             return root.xp + max(left_max, right_max)
@@ -35,8 +32,7 @@ class DFS:
     def do_xp_nodes(self, xp_nodes):
         res = []
         for xp in xp_nodes:
-            for x in xp:
-                result = self.find_path_sum_by_dfs(x)
-                res.append(result)
+            result = self.find_path_sum_by_dfs(xp)
+            res.append(result)
 
         return max(res)

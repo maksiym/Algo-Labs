@@ -50,8 +50,8 @@ def main():
     temp1 = create_from_input_file('resources/career1.in')
 
     graph_ladder = DFS()
-    result_xp_path = graph_ladder.do_xp_nodes(temp)
-    result_xp_path1 = graph_ladder.do_xp_nodes(temp1)
+    result_xp_path = graph_ladder.do_xp_nodes(temp[-1])
+    result_xp_path1 = graph_ladder.do_xp_nodes(temp1[-1])
 
     write_into_output_file('career.out', result_xp_path)
     write_into_output_file('career1.out', result_xp_path1)
