@@ -9,30 +9,29 @@ class XPNode:
 
 
 class DFS:
+
+    def __init__(self):
+        self.res = 0
+
     def find_path_sum_by_dfs(self, root: XPNode) -> int:
-        res = [root.xp]
         if not root:
             return 0
 
-        def dfs(root):
-            left_max = 0
-            right_max = 0
-            if root.l_root is not None:
-                left_max = dfs(root.l_root)
-            if root.r_root is not None:
-                right_max = dfs(root.r_root)
+        left_max = 0
+        right_max = 0
 
-            res[0] = max(res[0], root.xp + left_max, root.xp + right_max)
+        if root.l_root is not None:
+            left_max = self.find_path_sum_by_dfs(root.l_root)
+        if root.r_root is not None:
+            right_max = self.find_path_sum_by_dfs(root.r_root)
 
-            return root.xp + max(left_max, right_max)
+        self.res = max(self.res, root.xp + left_max, root.xp + right_max)
 
-        dfs(root)
-        return res[0]
+        return root.xp + max(left_max, right_max)
 
-    def do_xp_nodes(self, xp_nodes):
+    def dfs_xp_nodes(self, xp_nodes):
         res = []
         for xp in xp_nodes:
-            result = self.find_path_sum_by_dfs(xp)
-            res.append(result)
+            res.append(self.find_path_sum_by_dfs(xp))
 
         return max(res)
