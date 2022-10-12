@@ -23,7 +23,12 @@ class DFS:
         if root.l_root is not None:
             left_max = self.find_path_sum_by_dfs(root.l_root)
         if root.r_root is not None:
-            right_max = self.find_path_sum_by_dfs(root.r_root)
+            if root.l_root is None:
+                right_max = self.find_path_sum_by_dfs(root.r_root)
+
+            elif root.l_root.r_root is not None:
+                right_max = max(left_max - root.l_root.xp,
+                                self.find_path_sum_by_dfs(root.r_root.r_root) + root.r_root.xp)
 
         self.res = max(self.res, root.xp + left_max, root.xp + right_max)
 
