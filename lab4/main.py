@@ -8,6 +8,8 @@ def play_wchain_game(words_dictionary) -> int:
     tmp = ""
     ans = 0
 
+    words_dictionary.sort(key=len)
+
     for wd in words_dictionary:
         pref = ""
         i = 0
