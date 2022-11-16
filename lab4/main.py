@@ -5,30 +5,30 @@ def play_wchain_game(words_dictionary) -> int:
         max_chain_length[words_dictionary[i]] = 1
         i += 1
 
-    tmp = ""
-    ans = 0
+    temp = ""
+    answer = 0
 
     words_dictionary.sort(key=len)
 
-    for wd in words_dictionary:
+    for word in words_dictionary:
         pref = ""
         i = 0
-        while i < wd.__len__():
-            tmp = pref
+        while i < word.__len__():
+            temp = pref
             j = i + 1
-            while j < wd.__len__():
-                tmp += wd[j]
+            while j < word.__len__():
+                temp += word[j]
                 j += 1
 
-            if tmp in max_chain_length.keys() and max_chain_length[tmp] > 0:
-                max_chain_length[wd] = max(max_chain_length[wd], max_chain_length[tmp] + 1)
+            if temp in max_chain_length.keys() and max_chain_length[temp] > 0:
+                max_chain_length[word] = max(max_chain_length[word], max_chain_length[temp] + 1)
 
-            pref += wd[i]
+            pref += word[i]
             i += 1
 
-        ans = max(ans, max_chain_length[wd])
+        answer = max(answer, max_chain_length[word])
 
-    return ans
+    return answer
 
 
 def create_from_input_file(input_file_name: str):
